@@ -10,4 +10,6 @@ push:
 pull:
 	docker pull ${hub_namespace}/${image_name}
 deploy:
-	kubectl deploy -f deploy.yaml
+	kubectl apply -f deploy.yaml
+undeploy:
+	kubectl delete -f deploy.yaml

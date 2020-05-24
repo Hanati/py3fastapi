@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myapi
+spec:
+  selector:
+    matchLabels:
+      run: myapi
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        run: myapi
+    spec:
+      containers:
+      - name: myapi
+        image: natihd16/py3fastapi 
+        ports:
+        - containerPort: 8000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: myapi
+  labels:
+    run: myapi
+spec:
+  type: NodePort
+  ports:
+  - port: 8000
+    targetPort: 8000
+    protocol: TCP
+  selector:
+    run: myapi
